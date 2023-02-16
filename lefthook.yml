@@ -1,4 +1,4 @@
-#pre-push:
+pre-push:
   parallel: true
   commands:
     eslint:
