@@ -10,7 +10,7 @@ export const silentConnectWallet = async () => {
 }
 
 export const connectWallet = async () => {
-  const _windowStarknet = await connect()
+  const _windowStarknet = await connect({modalTheme: "light"})
   windowStarknet = _windowStarknet
   return windowStarknet ?? undefined
 }

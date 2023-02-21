@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { connectWallet } from '@/services/wallet.service'
 
 export default function Home() {

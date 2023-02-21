@@ -9,6 +9,8 @@ import {
   useState,
 } from "react"
 
+import { usePenpalParent } from '@weblivion/react-penpal';
+
 interface ModalProps {
   defaultLoggedIn?: boolean
   defaultEmail?: string
@@ -23,21 +25,49 @@ export default function Modal({
 }: ModalProps) {
   const navigate = useRouter()
 
+  const { parentMethods, connection } = usePenpalParent({
+    methods: {
+      multiply(num1: number, num2: number) {
+        return num1 * num2;
+      },
+      divide(num1: number, num2: number) {
+        // Return a promise if the value being
+        // returned requires asynchronous processing.
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(num1 / num2);
+          }, 1000);
+        });
+      }
+    },
+  });
+
+  /*useEffect(() => {
+    if (connection) {
+      let total = parentMethods.connect()
+      console.log(total)
+    }
+  }, [connection, parentMethods]);*/
+
+  async function handleClick(){
+    if (connection) {
+      let total = await parentMethods.connect()
+      console.log(total)
+    }
+  }
+
   const darkmode = (navigate.query["darkmode"] || defaultMode) === "true"
 
   return (
     <div>
-      Connect Fresh Web Wallet by
+      <button onClick={handleClick}>
       <Image
         src="/LEDGER-WORDMARK-BLACK-RGB.svg"
         alt="Ledger Logo"
         width={100}
         height={24}
         priority
-      />
-      <div>
-      <button>Connect</button>
-      </div>
+      /></button>
     </div>
   )
 }
