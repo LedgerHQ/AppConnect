@@ -16,7 +16,7 @@
     "@weblivion/react-penpal": "^2.0.0",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
-    "get-starknet": "link:../../get-starknet/packages/ui",
+    "get-starknet": "link:../../../get-starknet/packages/ui",
     "next": "13.1.6",
     "penpal": "^6.2.2",
     "react": "18.2.0",
