@@ -51,8 +51,7 @@ export default function Modal({
 
   async function handleClick(){
     if (connection) {
-      let total = await parentMethods.connect()
-      console.log(total)
+      await parentMethods.connect()
     }
   }
 

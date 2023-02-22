@@ -1,33 +1,22 @@
-import { hideIFrame } from "./components/iframe";
-import { hideModal } from "./components/modal";
-import { registerWindow } from "./lib/window";
-export let UsePin;
-export let TokenId;
+import type { StarknetWindowObject } from "get-starknet-core"
+import type { RpcMessage } from "get-starknet-core"
 
-export const register = ({
-  tokenId = "0x0",
-  usePin = false,
-  version = "3.x",
-}) => {
-  UsePin = usePin;
-  TokenId = tokenId;
-  registerWindow(version);
-  const element = document.querySelector<HTMLDivElement>("#freshwallet");
-  if (!element) {
-    throw new Error("Could not query starknetburner");
-  }
+export function getFreshStarknetObject():StarknetWindowObject {
+  let starknet: StarknetWindowObject = {
+    id: "",
+    name: "",
+    version: "",
+    icon: "",
+    isConnected: false,
+    request: (call: Omit<RpcMessage, "result">) => {
+      console.log(call); 
+      return new Promise((resolve) => { resolve(true) })
+    },
+    enable: () => new Promise((resolve) => resolve(new Array<string>())), 
+    isPreauthorized: () => new Promise((resolve) => { resolve(true) }),
+    on: () => {},
+    off: () => {}
+  };
 
-  element.innerHTML = `
-    <div id="modal-wrapper"></div>
-    <iframe id="iframe" 
-	src="${
-    "https://keyring.qasar.xyz/"
-  }"
-       allow="clipboard-write"/>
-`;
-  //hideIFrame();
-  //hideModal();
-};
-
-export type { IStarknetWindowObject } from "./lib/interface";
-export { walletWindow } from "./lib/window";
+  return starknet
+}
