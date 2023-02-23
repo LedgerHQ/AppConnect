@@ -13,6 +13,7 @@ export default function Home() {
   async function handleConnectClick(s: string){ 
     console.log(s)
     const wallet = await connectWallet()
+    console.log(wallet)
     setConnected(!!wallet?.isConnected)
   }
 
